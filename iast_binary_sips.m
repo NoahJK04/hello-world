@@ -17,7 +17,8 @@ if exist('fsolve','file') == 2
 else
     % Fallback to fminsearch if optimization toolbox is unavailable
     obj = @(x) sum(iast_residuals(x, T, P_bar, yO2, yN2, iso).^2);
-    sol = fminsearch(obj, p0_guess);
+    options = optimset('Display','off','MaxFunEvals',5000,'MaxIter',5000);
+    sol = fminsearch(obj, p0_guess, options);
 end
 
 p0_O2 = max(sol(1), 1e-9);

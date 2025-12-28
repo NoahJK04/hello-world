@@ -11,6 +11,10 @@ if ~valve.open
     return;
 end
 
+if ~isfield(valve, 'Cv')
+    valve.Cv = 0;
+end
+
 switch valve.mode
     case 'ball'
         % Treat as very large Cv (minimal resistance)
