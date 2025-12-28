@@ -1,8 +1,8 @@
 function [results, history] = simulate_to_css(x0, par)
 %SIMULATE_TO_CSS Run repeated cycles until cyclic steady state.
 
-max_cycles = 50;
-css_tol = 1e-4;
+max_cycles = par.max_cycles;
+css_tol = par.css_tol;
 
 x_prev = x0;
 results = [];

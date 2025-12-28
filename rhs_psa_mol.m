@@ -152,7 +152,12 @@ for b = 1:2
     dwO2_vec = zeros(Nz,1);
     dwN2_vec = zeros(Nz,1);
     for i = 1:Nz
-        [wO2_star, wN2_star] = iast_binary_sips(Tg(i), P(i)*par.u.Pa_to_bar, yO2(i), yN2(i), par.iso);
+        if par.use_iast
+            [wO2_star, wN2_star] = iast_binary_sips(Tg(i), P(i)*par.u.Pa_to_bar, yO2(i), yN2(i), par.iso);
+        else
+            wO2_star = isotherm_sips(Tg(i), yO2(i)*P(i)*par.u.Pa_to_bar, par.iso.O2);
+            wN2_star = isotherm_sips(Tg(i), yN2(i)*P(i)*par.u.Pa_to_bar, par.iso.N2);
+        end
         dwO2_vec(i) = kinetics_qdf_darken(Tg(i), P(i)*par.u.Pa_to_bar, wO2(i), wO2_star, par.kin.O2, par.rp);
         dwN2_vec(i) = kinetics_qdf_darken(Tg(i), P(i)*par.u.Pa_to_bar, wN2(i), wN2_star, par.kin.N2, par.rp);
     end

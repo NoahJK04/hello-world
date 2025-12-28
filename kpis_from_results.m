@@ -34,6 +34,14 @@ kpi.productivity = kpi.product_flow_m3nph / par.Vb;
 % Air demand (m3_n/h air per m3_n/h N2)
 kpi.air_demand = (u.molps_to_m3nph(Ffeed)) / max(kpi.product_flow_m3nph, 1e-9);
 
+% Sanitize outputs
+fields = {'purity','recovery','productivity','air_demand','product_flow_m3nph'};
+for i = 1:numel(fields)
+    if ~isfinite(kpi.(fields{i}))
+        kpi.(fields{i}) = NaN;
+    end
+end
+
 end
 
 function idx = psa_indices(Nz)

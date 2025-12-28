@@ -122,6 +122,10 @@ par.dz = par.z(2)-par.z(1);
 
 par.abs_tol = 1e-7;
 par.rel_tol = 1e-5;
+par.use_iast = true;
+par.max_cycles = 50;
+par.css_tol = 1e-4;
+par.enable_plots = true;
 
 % -----------------------------
 % Cycle definition
