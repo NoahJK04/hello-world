@@ -61,6 +61,7 @@ par.iso.O2.b0 = 9.436e-2;  % 1/bar
 par.iso.O2.Q = 1.222e4;    % kJ/kmol (numerically equals J/mol)
 par.iso.O2.n0 = 1.120;
 par.iso.O2.alpha = 3.341e-1;
+par.iso.O2.T0 = par.iso.T0;
 
 par.iso.N2.ws0 = 2.707e-3; % kmol/kg
 par.iso.N2.chi = 1.146;
@@ -68,6 +69,7 @@ par.iso.N2.b0 = 1.205e-1;  % 1/bar
 par.iso.N2.Q = 1.187e4;    % kJ/kmol (numerically equals J/mol)
 par.iso.N2.n0 = 1.185;
 par.iso.N2.alpha = 2.263e-1;
+par.iso.N2.T0 = par.iso.T0;
 
 % -----------------------------
 % Kinetics parameters

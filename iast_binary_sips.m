@@ -11,8 +11,14 @@ end
 % Root solve for fictitious pressures p0_O2 and p0_N2
 p0_guess = [max(yO2*P_bar,1e-6); max(yN2*P_bar,1e-6)];
 
-options = optimoptions('fsolve','Display','off');
-sol = fsolve(@(x) iast_residuals(x, T, P_bar, yO2, yN2, iso), p0_guess, options);
+if exist('fsolve','file') == 2
+    options = optimset('Display','off');
+    sol = fsolve(@(x) iast_residuals(x, T, P_bar, yO2, yN2, iso), p0_guess, options);
+else
+    % Fallback to fminsearch if optimization toolbox is unavailable
+    obj = @(x) sum(iast_residuals(x, T, P_bar, yO2, yN2, iso).^2);
+    sol = fminsearch(obj, p0_guess);
+end
 
 p0_O2 = max(sol(1), 1e-9);
 p0_N2 = max(sol(2), 1e-9);
